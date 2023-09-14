@@ -4,7 +4,6 @@ import com.example.casestudy.dto.BestCountryStatDto;
 import com.example.casestudy.dto.CountryDto;
 import com.example.casestudy.dto.CountryLanguagesDto;
 import com.example.casestudy.entities.Country;
-import com.example.casestudy.repositories.CountryLanguageRepository;
 import com.example.casestudy.repositories.CountryRepository;
 import com.example.casestudy.services.CountryStatService;
 import com.example.casestudy.services.LanguageService;
@@ -22,14 +21,11 @@ import java.util.List;
 public class CountriesController {
 
     private final CountryRepository countryRepository;
-    private final CountryLanguageRepository countryLanguageRepository;
     private final CountryStatService countryStatService;
     private final LanguageService languageService;
 
-    public CountriesController(CountryRepository countryRepository,
-                               CountryLanguageRepository countryLanguageRepository, CountryStatService countryStatService, LanguageService languageService) {
+    public CountriesController(CountryRepository countryRepository, CountryStatService countryStatService, LanguageService languageService) {
         this.countryRepository = countryRepository;
-        this.countryLanguageRepository = countryLanguageRepository;
         this.countryStatService = countryStatService;
         this.languageService = languageService;
     }
