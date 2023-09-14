@@ -4,10 +4,10 @@ import com.example.casestudy.dto.BestCountryStatDto;
 import com.example.casestudy.dto.CountryDto;
 import com.example.casestudy.dto.CountryLanguagesDto;
 import com.example.casestudy.entities.Country;
-import com.example.casestudy.entities.CountryLanguage;
 import com.example.casestudy.repositories.CountryLanguageRepository;
 import com.example.casestudy.repositories.CountryRepository;
 import com.example.casestudy.services.CountryStatService;
+import com.example.casestudy.services.LanguageService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +24,14 @@ public class CountriesController {
     private final CountryRepository countryRepository;
     private final CountryLanguageRepository countryLanguageRepository;
     private final CountryStatService countryStatService;
+    private final LanguageService languageService;
 
     public CountriesController(CountryRepository countryRepository,
-                               CountryLanguageRepository countryLanguageRepository, CountryStatService countryStatService) {
+                               CountryLanguageRepository countryLanguageRepository, CountryStatService countryStatService, LanguageService languageService) {
         this.countryRepository = countryRepository;
         this.countryLanguageRepository = countryLanguageRepository;
         this.countryStatService = countryStatService;
+        this.languageService = languageService;
     }
 
 
@@ -48,12 +50,7 @@ public class CountriesController {
         Country country = countryRepository.findById(countryId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        List<CountryLanguage> countryLanguages = countryLanguageRepository.findAllByCountry(country);
-        List<String> languages = new ArrayList<>();
-        for (CountryLanguage countryLanguage : countryLanguages) {
-            languages.add(countryLanguage.getLanguage().getLanguageName());
-        }
-        return new CountryLanguagesDto(country.getName(), languages);
+        return languageService.findCountryLanguages(country);
     }
 
     @GetMapping(path = "/gdp")
