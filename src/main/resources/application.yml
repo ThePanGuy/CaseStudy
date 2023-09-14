@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/case_study
+    username: vesselpro
+    password: vesselpro
+    tomcat:
+      initial-size: 10
+      max-active: 100
+      max-idle: 20
+      min-idle: 10
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8080
