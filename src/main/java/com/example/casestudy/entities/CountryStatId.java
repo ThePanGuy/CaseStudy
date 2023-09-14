@@ -13,6 +13,14 @@ public class CountryStatId implements Serializable {
     public CountryStatId() {
     }
 
+    public Long getCountryId() {
+        return countryId;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
