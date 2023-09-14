@@ -15,8 +15,11 @@ public class BestCountryStatDto {
     public BestCountryStatDto(Country country, CountryStat countryStat) {
         this.name = country.getName();
         this.countryCode3 = country.getCountryCode3();
-        this.year = countryStat.getId().getYear();
-        this.gdp = countryStat.getGdp();
+        if (countryStat != null) {
+            this.year = countryStat.getId().getYear();
+            this.population = countryStat.getPopulation();
+            this.gdp = countryStat.getGdp();
+        }
     }
 
     public String getName() {
