@@ -1,7 +1,6 @@
 package com.example.casestudy.entities;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.util.Objects;
