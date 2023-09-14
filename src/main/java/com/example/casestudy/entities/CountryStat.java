@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "country_stats")
 public class CountryStat {
     @EmbeddedId
     private CountryStatId id;

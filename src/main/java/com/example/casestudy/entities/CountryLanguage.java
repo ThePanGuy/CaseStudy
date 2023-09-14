@@ -3,6 +3,7 @@ package com.example.casestudy.entities;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "country_languages")
 public class CountryLanguage {
     @EmbeddedId
     private CountryLanguageId id;

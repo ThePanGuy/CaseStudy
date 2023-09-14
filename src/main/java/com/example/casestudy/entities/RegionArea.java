@@ -2,10 +2,12 @@ package com.example.casestudy.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "region_areas")
 public class RegionArea {
     @Id
     private String regionName;

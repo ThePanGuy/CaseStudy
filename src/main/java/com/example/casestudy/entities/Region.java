@@ -4,6 +4,7 @@ package com.example.casestudy.entities;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "regions")
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
