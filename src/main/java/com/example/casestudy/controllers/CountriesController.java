@@ -1,17 +1,14 @@
 package com.example.casestudy.controllers;
 
-import com.example.casestudy.dto.BestCountryStatDto;
-import com.example.casestudy.dto.CountryDto;
-import com.example.casestudy.dto.CountryLanguagesDto;
+import com.example.casestudy.dto.*;
 import com.example.casestudy.entities.Country;
 import com.example.casestudy.repositories.CountryRepository;
 import com.example.casestudy.services.CountryStatService;
 import com.example.casestudy.services.LanguageService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +50,11 @@ public class CountriesController {
     public List<BestCountryStatDto> getCountriesGdp() {
         List<Country> countries = countryRepository.findAll();
         return countryStatService.getCountriesBestStat(countries);
+    }
+
+    @PostMapping(path = "country-stats")
+    public Page<CountryStatDto> findCountryStats(@RequestBody FilterRequest filterRequest, Pageable pageable) {
+        return countryStatService.filterCountriesStats(filterRequest, pageable);
     }
 
 }

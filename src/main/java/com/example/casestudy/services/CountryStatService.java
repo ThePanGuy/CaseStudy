@@ -1,9 +1,13 @@
 package com.example.casestudy.services;
 
 import com.example.casestudy.dto.BestCountryStatDto;
+import com.example.casestudy.dto.CountryStatDto;
+import com.example.casestudy.dto.FilterRequest;
 import com.example.casestudy.entities.Country;
 import com.example.casestudy.entities.CountryStat;
 import com.example.casestudy.repositories.CountryStatRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,6 +25,12 @@ public class CountryStatService {
     public CountryStatService(CountryStatRepository countryStatRepository) {
         this.countryStatRepository = countryStatRepository;
     }
+
+    public Page<CountryStatDto> filterCountriesStats(FilterRequest filterRequest, Pageable pageable) {
+        return countryStatRepository.filterCountryStats(filterRequest.getRegionName(), filterRequest.getFrom(),
+                filterRequest.getTo(), pageable);
+    }
+
 
     public List<BestCountryStatDto> getCountriesBestStat(List<Country> countries) {
         Map<Country, CountryStat> bestCountryStatMap = new HashMap<>();
