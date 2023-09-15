@@ -52,7 +52,7 @@ public class CountriesController {
         return countryStatService.getCountriesBestStat(countries);
     }
 
-    @PostMapping(path = "country-stats")
+    @PostMapping(path = "/country-stats")
     public Page<CountryStatDto> findCountryStats(@RequestBody FilterRequest filterRequest, Pageable pageable) {
         return countryStatService.filterCountriesStats(filterRequest, pageable);
     }
