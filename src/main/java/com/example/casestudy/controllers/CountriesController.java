@@ -7,7 +7,9 @@ import com.example.casestudy.services.CountryStatService;
 import com.example.casestudy.services.LanguageService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class CountriesController {
     }
 
     @GetMapping(path = "/languages/{countryId}")
-    public CountryLanguagesDto getAllLanguagesForCountry(@RequestParam Long countryId) {
+    public CountryLanguagesDto getAllLanguagesForCountry(@PathVariable Long countryId) {
         Country country = countryRepository.findById(countryId)
                 .orElseThrow(EntityNotFoundException::new);
 
@@ -54,6 +56,7 @@ public class CountriesController {
 
     @PostMapping(path = "/country-stats")
     public Page<CountryStatDto> findCountryStats(@RequestBody FilterRequest filterRequest, Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id.year").ascending());
         return countryStatService.filterCountriesStats(filterRequest, pageable);
     }
 
