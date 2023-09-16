@@ -3,8 +3,8 @@ package com.example.casestudy.controllers;
 import com.example.casestudy.dto.*;
 import com.example.casestudy.entities.Country;
 import com.example.casestudy.repositories.CountryRepository;
-import com.example.casestudy.services.CountryStatService;
-import com.example.casestudy.services.LanguageService;
+import com.example.casestudy.services.CountryStatServiceImpl;
+import com.example.casestudy.services.LanguageServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,13 +20,13 @@ import java.util.List;
 public class CountriesController {
 
     private final CountryRepository countryRepository;
-    private final CountryStatService countryStatService;
-    private final LanguageService languageService;
+    private final CountryStatServiceImpl countryStatServiceImpl;
+    private final LanguageServiceImpl languageServiceImpl;
 
-    public CountriesController(CountryRepository countryRepository, CountryStatService countryStatService, LanguageService languageService) {
+    public CountriesController(CountryRepository countryRepository, CountryStatServiceImpl countryStatServiceImpl, LanguageServiceImpl languageServiceImpl) {
         this.countryRepository = countryRepository;
-        this.countryStatService = countryStatService;
-        this.languageService = languageService;
+        this.countryStatServiceImpl = countryStatServiceImpl;
+        this.languageServiceImpl = languageServiceImpl;
     }
 
 
@@ -45,13 +45,13 @@ public class CountriesController {
         Country country = countryRepository.findById(countryId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        return languageService.findCountryLanguages(country);
+        return languageServiceImpl.findCountryLanguages(country);
     }
 
     @GetMapping(path = "/gdp")
     public List<BestCountryStatDto> getCountriesGdp() {
         List<Country> countries = countryRepository.findAll();
-        return countryStatService.getCountriesBestStat(countries);
+        return countryStatServiceImpl.getCountriesBestStat(countries);
     }
 
     @PostMapping(path = "/country-stats")
@@ -59,7 +59,7 @@ public class CountriesController {
         if (pageable.getSort().isEmpty()) {
             pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id.year").descending());
         }
-        return countryStatService.filterCountriesStats(filterRequest, pageable);
+        return countryStatServiceImpl.filterCountriesStats(filterRequest, pageable);
     }
 
 }
