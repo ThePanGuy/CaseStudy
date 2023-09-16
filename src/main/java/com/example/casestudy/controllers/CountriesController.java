@@ -56,7 +56,9 @@ public class CountriesController {
 
     @PostMapping(path = "/country-stats")
     public Page<CountryStatDto> findCountryStats(@RequestBody FilterRequest filterRequest, Pageable pageable) {
-        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id.year").ascending());
+        if (pageable.getSort().isEmpty()) {
+            pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id.year").descending());
+        }
         return countryStatService.filterCountriesStats(filterRequest, pageable);
     }
 
