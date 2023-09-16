@@ -3,19 +3,27 @@ package com.example.casestudy.dto;
 import java.util.List;
 
 public class CountryLanguagesDto {
-    private String name;
-    private List<String> language;
+    private String countryName;
+    private List<String> languages;
 
-    public CountryLanguagesDto(String name, List<String> language) {
-        this.name = name;
-        this.language = language;
+    public CountryLanguagesDto(String countryName, List<String> languages) {
+        this.countryName = countryName;
+        this.languages = languages;
     }
 
-    public String getName() {
-        return name;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public List<String> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
     }
 }

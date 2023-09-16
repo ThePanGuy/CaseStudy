@@ -6,14 +6,14 @@ import com.example.casestudy.entities.CountryStat;
 import java.math.BigDecimal;
 
 public class BestCountryStatDto {
-    private String name;
+    private String countryName;
     private String countryCode3;
     private Integer year;
     private Integer population;
     private BigDecimal gdp;
 
     public BestCountryStatDto(Country country, CountryStat countryStat) {
-        this.name = country.getName();
+        this.countryName = country.getName();
         this.countryCode3 = country.getCountryCode3();
         if (countryStat != null) {
             this.year = countryStat.getId().getYear();
@@ -22,12 +22,12 @@ public class BestCountryStatDto {
         }
     }
 
-    public String getName() {
-        return name;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 
     public String getCountryCode3() {
