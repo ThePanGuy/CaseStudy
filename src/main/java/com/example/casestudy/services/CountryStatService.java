@@ -27,8 +27,8 @@ public class CountryStatService {
     }
 
     public Page<CountryStatDto> filterCountriesStats(FilterRequest filterRequest, Pageable pageable) {
-        return countryStatRepository.filterCountryStats(filterRequest.getRegionName(), filterRequest.getFrom(),
-                filterRequest.getTo(), pageable);
+        return countryStatRepository.filterCountryStats("%" + filterRequest.getRegionName() + "%",
+                filterRequest.getFrom(), filterRequest.getTo(), pageable);
     }
 
 

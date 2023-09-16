@@ -20,7 +20,7 @@ public interface CountryStatRepository extends JpaRepository<CountryStat, Countr
            "inner join cs.country c " +
            "inner join c.region r " +
            "inner join r.continent ct " +
-           "where (:regionName is null or r.name = :regionName) " +
+           "where (:regionName is null or upper(r.name) like upper(:regionName)) " +
            "and (:fromDate is null or cs.id.year >= :fromDate) " +
            "and (:toDate is null or cs.id.year <= :toDate)")
     Page<CountryStatDto> filterCountryStats(
