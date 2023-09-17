@@ -1,7 +1,7 @@
 package com.example.casestudy.repositories;
 
-import com.example.casestudy.entities.VIP;
+import com.example.casestudy.entities.Vip;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VIPRepository extends JpaRepository<VIP, Long> {
+public interface VipRepository extends JpaRepository<Vip, Long> {
 }
