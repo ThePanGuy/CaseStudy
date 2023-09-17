@@ -8,7 +8,7 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long guestId;
-
+    @Column
     private String name;
 
     public Long getGuestId() {

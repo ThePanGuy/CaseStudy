@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class CountryLanguage {
     @EmbeddedId
     private CountryLanguageId id;
-
+    @Column
     private boolean official;
 
     @MapsId("countryId")

@@ -1,5 +1,6 @@
 package com.example.casestudy.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.io.Serializable;
@@ -7,7 +8,9 @@ import java.util.Objects;
 
 @Embeddable
 public class CountryLanguageId implements Serializable {
+    @Column
     private Long countryId;
+    @Column
     private Long languageId;
 
     public CountryLanguageId() {

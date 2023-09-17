@@ -8,7 +8,7 @@ public class Vip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long vipId;
-
+    @Column
     private String name;
 
     public Long getVipId() {

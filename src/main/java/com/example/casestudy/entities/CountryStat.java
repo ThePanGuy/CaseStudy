@@ -9,8 +9,9 @@ import java.math.BigDecimal;
 public class CountryStat {
     @EmbeddedId
     private CountryStatId id;
-
+    @Column
     private Integer population;
+    @Column
     private BigDecimal gdp;
 
     @MapsId("countryId")

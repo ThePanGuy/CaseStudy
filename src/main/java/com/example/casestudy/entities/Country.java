@@ -11,9 +11,11 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long countryId;
-
+    @Column
     private String name;
+    @Column
     private BigDecimal area;
+    @Column
     private Date nationalDay;
 
     @Column(name = "country_code2", nullable = false, unique = true, length = 2)
