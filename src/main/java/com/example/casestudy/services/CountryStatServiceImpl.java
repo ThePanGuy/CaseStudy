@@ -36,7 +36,7 @@ public class CountryStatServiceImpl implements CountryStatService {
 
     @Override
     public Page<CountryStatDto> filterCountriesStats(FilterRequest filterRequest, Pageable pageable) {
-        return countryStatRepository.filterCountryStats("%" + filterRequest.getRegionName() + "%",
+        return countryStatRepository.filterCountryStats(filterRequest.getRegionId(),
                 filterRequest.getFrom(), filterRequest.getTo(), pageable);
     }
 

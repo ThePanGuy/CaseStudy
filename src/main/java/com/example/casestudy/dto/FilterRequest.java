@@ -1,16 +1,16 @@
 package com.example.casestudy.dto;
 
 public class FilterRequest {
-    private String regionName;
+    private Long regionId;
     private Integer from;
     private Integer to;
 
-    public String getRegionName() {
-        return regionName;
+    public Long getRegionId() {
+        return regionId;
     }
 
-    public void setRegionName(String regionName) {
-        this.regionName = regionName;
+    public void setRegionId(Long regionId) {
+        this.regionId = regionId;
     }
 
     public Integer getFrom() {
