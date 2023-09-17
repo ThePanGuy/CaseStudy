@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class CountryStatServiceImpl implements CountryStatService{
+public class CountryStatServiceImpl implements CountryStatService {
 
     private final CountryStatRepository countryStatRepository;
     private final CountryRepository countryRepository;
@@ -28,6 +28,10 @@ public class CountryStatServiceImpl implements CountryStatService{
                                   CountryRepository countryRepository) {
         this.countryStatRepository = countryStatRepository;
         this.countryRepository = countryRepository;
+    }
+
+    private static BigDecimal calculateGpdPerPopulationRatio(CountryStat countryStat) {
+        return countryStat.getGdp().divide(BigDecimal.valueOf(countryStat.getPopulation()), RoundingMode.HALF_UP);
     }
 
     @Override
@@ -58,9 +62,5 @@ public class CountryStatServiceImpl implements CountryStatService{
             }
         }
         return bestStat;
-    }
-
-    private static BigDecimal calculateGpdPerPopulationRatio(CountryStat countryStat) {
-        return countryStat.getGdp().divide(BigDecimal.valueOf(countryStat.getPopulation()), RoundingMode.HALF_UP);
     }
 }

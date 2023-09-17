@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RegionServiceImpl implements RegionService{
+public class RegionServiceImpl implements RegionService {
     private final RegionRepository regionRepository;
 
     public RegionServiceImpl(RegionRepository regionRepository) {

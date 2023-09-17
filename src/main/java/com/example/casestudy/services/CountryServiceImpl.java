@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CountryServiceImpl implements CountryService{
+public class CountryServiceImpl implements CountryService {
     private final CountryRepository countryRepository;
 
     public CountryServiceImpl(CountryRepository countryRepository) {

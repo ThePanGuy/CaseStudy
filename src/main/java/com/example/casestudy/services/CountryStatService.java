@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface CountryStatService {
     Page<CountryStatDto> filterCountriesStats(FilterRequest filterRequest, Pageable pageable);
+
     List<BestCountryStatDto> getCountriesBestStats();
 }
