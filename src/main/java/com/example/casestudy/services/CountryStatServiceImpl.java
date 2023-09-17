@@ -5,6 +5,7 @@ import com.example.casestudy.dto.CountryStatDto;
 import com.example.casestudy.dto.FilterRequest;
 import com.example.casestudy.entities.Country;
 import com.example.casestudy.entities.CountryStat;
+import com.example.casestudy.repositories.CountryRepository;
 import com.example.casestudy.repositories.CountryStatRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,9 +22,12 @@ import java.util.Map;
 public class CountryStatServiceImpl implements CountryStatService{
 
     private final CountryStatRepository countryStatRepository;
+    private final CountryRepository countryRepository;
 
-    public CountryStatServiceImpl(CountryStatRepository countryStatRepository) {
+    public CountryStatServiceImpl(CountryStatRepository countryStatRepository,
+                                  CountryRepository countryRepository) {
         this.countryStatRepository = countryStatRepository;
+        this.countryRepository = countryRepository;
     }
 
     @Override
@@ -33,7 +37,8 @@ public class CountryStatServiceImpl implements CountryStatService{
     }
 
     @Override
-    public List<BestCountryStatDto> getCountriesBestStat(List<Country> countries) {
+    public List<BestCountryStatDto> getCountriesBestStats() {
+        List<Country> countries = countryRepository.findAll();
         Map<Country, CountryStat> bestCountryStatMap = new HashMap<>();
         for (Country country : countries) {
             bestCountryStatMap.put(country, findBestCountryStat(country));
