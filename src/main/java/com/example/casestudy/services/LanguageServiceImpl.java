@@ -6,7 +6,6 @@ import com.example.casestudy.entities.CountryLanguage;
 import com.example.casestudy.repositories.CountryLanguageRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,10 +21,14 @@ public class LanguageServiceImpl implements LanguageService{
     @Override
     public CountryLanguagesDto findCountryLanguages(Country country) {
         List<CountryLanguage> countryLanguages = countryLanguageRepository.findAllByCountry(country);
-        List<String> languages = new ArrayList<>();
+        CountryLanguagesDto countryLanguagesDto = new CountryLanguagesDto(country.getName());
         for (CountryLanguage countryLanguage : countryLanguages) {
-            languages.add(countryLanguage.getLanguage().getLanguageName());
+            if (countryLanguage.isOfficial()) {
+                countryLanguagesDto.addOfficialLanguage(countryLanguage.getLanguage().getLanguageName());
+            } else {
+                countryLanguagesDto.addLanguage(countryLanguage.getLanguage().getLanguageName());
+            }
         }
-        return new CountryLanguagesDto(country.getName(), languages);
+        return countryLanguagesDto;
     }
 }
