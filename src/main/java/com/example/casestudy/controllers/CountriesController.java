@@ -3,9 +3,9 @@ package com.example.casestudy.controllers;
 import com.example.casestudy.dto.*;
 import com.example.casestudy.entities.Country;
 import com.example.casestudy.repositories.CountryRepository;
-import com.example.casestudy.services.CountryServiceImpl;
-import com.example.casestudy.services.CountryStatServiceImpl;
-import com.example.casestudy.services.LanguageServiceImpl;
+import com.example.casestudy.services.CountryService;
+import com.example.casestudy.services.CountryStatService;
+import com.example.casestudy.services.LanguageService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,21 +20,21 @@ import java.util.List;
 public class CountriesController {
 
     private final CountryRepository countryRepository;
-    private final CountryStatServiceImpl countryStatServiceImpl;
-    private final LanguageServiceImpl languageServiceImpl;
-    private final CountryServiceImpl countryServiceImpl;
+    private final CountryStatService countryStatService;
+    private final LanguageService languageService;
+    private final CountryService countryService;
 
-    public CountriesController(CountryRepository countryRepository, CountryStatServiceImpl countryStatServiceImpl, LanguageServiceImpl languageServiceImpl, CountryServiceImpl countryServiceImpl) {
+    public CountriesController(CountryRepository countryRepository, CountryStatService countryStatService, LanguageService languageService, CountryService countryService) {
         this.countryRepository = countryRepository;
-        this.countryStatServiceImpl = countryStatServiceImpl;
-        this.languageServiceImpl = languageServiceImpl;
-        this.countryServiceImpl = countryServiceImpl;
+        this.countryStatService = countryStatService;
+        this.languageService = languageService;
+        this.countryService = countryService;
     }
 
 
     @GetMapping(path = "/all")
     public List<CountryDto> getAllCountries() {
-        return countryServiceImpl.fetchAllCountries();
+        return countryService.fetchAllCountries();
     }
 
     @GetMapping(path = "/languages/{countryId}")
@@ -42,12 +42,12 @@ public class CountriesController {
         Country country = countryRepository.findById(countryId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        return languageServiceImpl.findCountryLanguages(country);
+        return languageService.findCountryLanguages(country);
     }
 
     @GetMapping(path = "/gdp")
     public List<BestCountryStatDto> getCountriesGdp() {
-        return countryStatServiceImpl.getCountriesBestStats();
+        return countryStatService.getCountriesBestStats();
     }
 
     @PostMapping(path = "/country-stats")
@@ -55,7 +55,7 @@ public class CountriesController {
         if (pageable.getSort().isEmpty()) {
             pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id.year").descending());
         }
-        return countryStatServiceImpl.filterCountriesStats(filterRequest, pageable);
+        return countryStatService.filterCountriesStats(filterRequest, pageable);
     }
 
 }
