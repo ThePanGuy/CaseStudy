@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/case_study
-    username: vesselpro
-    password: vesselpro
+    username: pantelisN
+    password: panNikPass
     tomcat:
       initial-size: 10
       max-active: 100
